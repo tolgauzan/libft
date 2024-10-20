@@ -392,9 +392,24 @@ void	ft_strmapi_check(void)
 	
 }
 
+#include <fcntl.h>    // open ve flag'ler için
+#include <sys/stat.h> // mode için
+#include <unistd.h>   // write ve close için
+void	ft_putchar_fd_check()
+{
+	
+	int fd = open("dosya.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		printf("fd açılmadı");
+	}
+	ft_putchar_fd('T', fd);
+	ft_putchar_fd('\n', fd);
+
+	close(fd);
+}
 
 int	main(void)
 {
-	ft_itoa_check();
 	return 0;
 }
