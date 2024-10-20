@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuzan <tuzan@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 19:09:00 by tuzan             #+#    #+#             */
-/*   Updated: 2024/10/20 19:09:00 by tuzan            ###   ########.fr       */
+/*   Created: 2024/10/20 23:37:26 by tuzan             #+#    #+#             */
+/*   Updated: 2024/10/20 23:37:26 by tuzan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
-
-void	ft_putendl_fd(char *s, int fd)
+//#include <stdlib.h>
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (s)
+	t_list	*mappedlist;
+	t_list	*node;
+
+	if (!lst || !f || !del)
+		return (NULL);
+	mappedlist = NULL;
+	while (lst != NULL)
 	{
-		ft_putstr_fd(s, fd);
-		write(fd, "\n", 1);
+		node = ft_lstnew(f(lst->content));
+		if (node == NULL)
+		{
+			ft_lstclear(&mappedlist, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&mappedlist, node);
+		lst = lst->next;
 	}
+	return (mappedlist);
 }
