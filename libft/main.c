@@ -341,6 +341,19 @@ void	ft_split_check(void)
 	}
 	free(result); // Son diziyi serbest bırak
 }
+
+void	ft_itoa_check(void)
+{
+	int num = -2147483648;
+    char *result = ft_itoa(num);
+
+    if (result) {
+        printf("ft_itoa() %s\n", result);
+        free(result);
+    } else {
+        printf("Bellek ayrılamadı\n");
+    }
+}
 //striteri
 void	ft_iter(unsigned int index, char *c)
 {
@@ -356,7 +369,6 @@ void	ft_striteri_check(void)
 	ft_striteri(arr, ft_iter);
 	printf("ft_iteri(); arr[] = %s\n\n\n", arr);
 }
-
 
 //strmapi
 char	to_upper(unsigned int index, char c)
@@ -383,6 +395,6 @@ void	ft_strmapi_check(void)
 
 int	main(void)
 {
-	printf("Hello World :)");
+	ft_itoa_check();
 	return 0;
 }

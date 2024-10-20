@@ -1,38 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuzan <tuzan@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 21:15:09 by tuzan             #+#    #+#             */
-/*   Updated: 2024/10/19 21:15:09 by tuzan            ###   ########.fr       */
+/*   Created: 2024/10/20 04:33:33 by tuzan             #+#    #+#             */
+/*   Updated: 2024/10/20 04:33:33 by tuzan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-//#include <sys/_types/_null.h>
+//#include <stdlib.h>
+static	int	digit_count(int n)
+{
+	int	len;
 
-char	*ft_strjoin(char const *s1, char const *s2)
+	len = 0;
+	if (n < 0)
+	{
+		len++;
+		n *= -1;
+	}
+	while (n)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
 {
 	char	*str;
-	char	*dest_start;
+	int		len;
+	long	num;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	num = (long)n;
+	len = digit_count(num);
+	if (n == 0)
+		return (ft_strdup("0"));
+	str = (char *) ft_calloc(len + 1, sizeof(char));
 	if (str == NULL)
 		return (NULL);
-	dest_start = str;
-	while (*s1)
+	if (num < 0)
 	{
-		*str++ = *s1++;
+		str[0] = '-';
+		num *= -1;
 	}
-	while (*s2)
+	while (num > 0)
 	{
-		*str++ = *s2++;
+		str[--len] = (num % 10) + '0';
+		num = num / 10;
 	}
-	*str = '\0';
-	return (dest_start);
+	return (str);
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-# include <stdlib.h>
+#include <stdlib.h>
 //#include <sys/_types/_null.h>
 
 char	*ft_strdup(const char *s)

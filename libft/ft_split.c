@@ -13,7 +13,6 @@
 #include "libft.h"
 //#include <stdlib.h>
 
-
 static char	**free_memory(char **arr)
 {
 	char	**ptr;
