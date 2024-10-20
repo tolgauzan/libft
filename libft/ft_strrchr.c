@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <sys/_types/_null.h>
 
 char	*ft_strrchr(const char *s, int c)
 {

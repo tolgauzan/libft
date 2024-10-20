@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdlib.h>
+
 static	int	digit_count(int n)
 {
 	int	len;

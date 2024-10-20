@@ -12,8 +12,6 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-//#include <sys/_types/_size_t.h>
-//#include <sys/_types/_null.h>
 # include <stdlib.h>
 
 int		ft_isalpha(int c);

@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-//#include <sys/_types/_null.h>
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
