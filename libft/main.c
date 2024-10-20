@@ -95,8 +95,9 @@ void 	ft_tolower_check(void)
 }
 
 #include <string.h>
-void	ft_strlen_check(const char *str)
+void	ft_strlen_check(void)
 {
+	char str[] = "tolgauzan";
 	size_t result_len;
 
 	printf("#include \"libft.h\" ft_strlen(str);\n");
@@ -107,7 +108,7 @@ void	ft_strlen_check(const char *str)
 	printf("strlen : %ld\n\n\n",result_len);
 }
 
-void	ft_memset_check()
+void	ft_memset_check(void)
 {
 	char myarr[6] = "hello";
 	printf("myarr[6] = %s \n", myarr);
@@ -137,7 +138,7 @@ void	ft_memset_check()
 	printf("\n\n\n");
 }
 
-void	ft_bzero_check()
+void	ft_bzero_check(void)
 {
 	char myarr[6] = "hello";
 	printf("myarr[6] = %s \n", myarr);
@@ -166,7 +167,7 @@ void	ft_bzero_check()
 	printf("\n\n\n");
 }
 
-void	ft_memcpy_check()
+void	ft_memcpy_check(void)
 {
 	char src1[] ="Tolga Uzan";
 	char dest1[20];
@@ -180,7 +181,7 @@ void	ft_memcpy_check()
 	printf("dest2[] = %s\n\n\n", dest2);
 }
 
-void 	ft_memmove_check()
+void 	ft_memmove_check(void)
 {
 	char str[50] = "HelloWorld";
 	printf("Orj str %s\n", str);
@@ -188,7 +189,7 @@ void 	ft_memmove_check()
 	printf("ft_memmove result : %s\n\n\n\n", str);
 }
 
-void	ft_strlcpy_check()
+void	ft_strlcpy_check(void)
 {
 	char dest[10];
 	char src[] = "tolga";
@@ -197,7 +198,7 @@ void	ft_strlcpy_check()
 	printf("dest : %s\n\n\n", dest);
 }
 
-void	ft_strlcat_check()
+void	ft_strlcat_check(void)
 {
 	char dest[20] = "tolga";
 	char src[] = "uzan";
@@ -205,21 +206,21 @@ void	ft_strlcat_check()
 	printf("return : %d\n dest :%s\n\n\n",res, dest);
 }
 
-void	ft_strchr_check()
+void	ft_strchr_check(void)
 {
 	char arr[] = "tolgauzan";
 	printf("Arr ilk adresi : %p\n", arr); 
 	printf("Null bulunan adresi : %p \n\n\n", ft_strchr(arr,'\0'));
 }
 
-void	ft_strrchr_check()
+void	ft_strrchr_check(void)
 {
 	char arr[] = "tolgauzan";
 	printf("Sonraki nullterminator'u bul %p\n",&arr[9]);
 	printf("Sondan ara %p\n\n\n", ft_strrchr(arr, '\0'));
 }
 
-void	ft_strncmp_check()
+void	ft_strncmp_check(void)
 {
 	char arr1[] = "aaabaa";
 	char arr2[] = "aaab";
@@ -227,7 +228,7 @@ void	ft_strncmp_check()
 	printf("strncmp() %d\n\n\n",strncmp(arr1,arr2,4));
 }
 
-void	ft_memchr_check()
+void	ft_memchr_check(void)
 {
 	char arr[] = "Tolga Uzan";
 	char *result  = (char *)ft_memchr(arr,'a',5);
@@ -237,7 +238,7 @@ void	ft_memchr_check()
 	printf("memchr() : %p\n\n", memchr(arr,'a',5));
 }
 
-void	ft_memcmp_check()
+void	ft_memcmp_check(void)
 {
 	char arr1[] = "aaaaa";
 	char arr2[] = "aaaz";
@@ -245,7 +246,7 @@ void	ft_memcmp_check()
 	printf("memcmp():  %d\n\n\n", memcmp(arr1,arr2,4));
 }
 
-void	ft_strnstr_check()
+void	ft_strnstr_check(void)
 {
 	char fullstr[]= "tolgauzan hello";
 	char substr[]= "uzan";
@@ -256,7 +257,7 @@ void	ft_strnstr_check()
 	printf("Bulundu ilk adres %s\n\n\n", ft_strnstr(fullstr,substr,9));
 }
 
-void	ft_strdup_check()
+void	ft_strdup_check(void)
 {
 	char arr[] = "tolga";
 	char *dest = ft_strdup(arr);
@@ -267,7 +268,7 @@ void	ft_strdup_check()
 
 #include <stdlib.h>
 
-void	ft_atoi_check()
+void	ft_atoi_check(void)
 {
 	printf("#include \"ftlib.h\" ft_atoi(str);\n");
 	printf("ft_atoi() : %d \n", ft_atoi("\t\n\v\r\f  -+-2147483647"));
@@ -287,7 +288,7 @@ void	ft_atoi_check()
 	printf("atoi() : %d \n\n\n", atoi("\t\n\v\r\f   +21474836499"));
 }
 
-void	ft_calloc_check()
+void	ft_calloc_check(void)
 {
 	int *ptr = (int *)ft_calloc(5,sizeof(int));
 	if (ptr)
@@ -301,8 +302,45 @@ void	ft_calloc_check()
 	}
 	printf("\n\n\n");
 }
-
 //addition funcs
+void	ft_strjoin_check(void)
+{
+	char arr1[] = "tolga";
+	char arr2[] = "uzan";
+	char *resultarr = ft_strjoin(arr1,arr2);
+	printf("%s", resultarr);
+	free(resultarr);
+}
+
+void	ft_strtrim_check(void)
+{
+	printf("%s", ft_strtrim(" , , |tolgauzan | , , ", " ,"));
+}
+
+void	ft_strsub_check(void)
+{
+	char str[] = "tolgauzan";
+
+	char *result = ft_substr(str,1,2);
+	printf("%s", result);
+	free(result);
+}
+
+void	ft_split_check(void)
+{
+	char **result;
+	int i = 0;
+
+	result = ft_split(" tolga uzan tolga uzan ", ' ');
+	
+	while (result[i] != NULL)
+	{
+		printf("Kelime %d: %s\n", i + 1, result[i]);
+		free(result[i]); // Her kelimeyi serbest bırak
+		i++;
+	}
+	free(result); // Son diziyi serbest bırak
+}
 //striteri
 void	ft_iter(unsigned int index, char *c)
 {
@@ -312,7 +350,7 @@ void	ft_iter(unsigned int index, char *c)
 		//*c = '*';
 	}	
 }
-void	ft_striteri_check()
+void	ft_striteri_check(void)
 {
 	char arr[] = "toLGa UzAnNnNnNnN";
 	ft_striteri(arr, ft_iter);
@@ -325,7 +363,7 @@ char	to_upper(unsigned int index, char c)
 {
 	return (char)ft_toupper(c);
 }
-void	ft_strmapi_check()
+void	ft_strmapi_check(void)
 {
 	char orjinalstr[] = "ToLGa UzAn";
 	char *resultstr;
@@ -341,10 +379,10 @@ void	ft_strmapi_check()
 		printf("Bellek tahsisis başarısız oldu");
 	
 }
+
+
 int	main(void)
 {
-	char str[] = "Hello World";
-
-	ft_striteri_check();
-	return (0);
+	printf("Hello World :)");
+	return 0;
 }

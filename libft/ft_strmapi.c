@@ -6,12 +6,13 @@
 /*   By: tuzan <tuzan@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:51:09 by tuzan             #+#    #+#             */
-/*   Updated: 2024/10/18 18:36:21 by tuzan            ###   ########.fr       */
+/*   Updated: 2024/10/20 04:18:12 by tuzan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+//#include <sys/_types/_null.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

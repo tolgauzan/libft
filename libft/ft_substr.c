@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuzan <tuzan@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:31:08 by tuzan             #+#    #+#             */
-/*   Updated: 2024/10/16 18:31:08 by tuzan            ###   ########.fr       */
+/*   Created: 2024/10/19 18:53:44 by tuzan             #+#    #+#             */
+/*   Updated: 2024/10/19 18:53:44 by tuzan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+# include <stdlib.h>
 //#include <sys/_types/_null.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
+	char	*substr;
 
-	i = 0;
-	if (!(dest && src))
+	if (s == NULL)
 		return (NULL);
-	while (i < n)
-	{
-		*((unsigned char *)dest + i) = *((unsigned char *)src + i);
-		i++;
-	}
-	return (dest);
+	if (len == 0 || start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	substr = (char *)malloc((len + 1) * sizeof(char));
+	if (substr == NULL)
+		return (NULL);
+	ft_strlcpy(substr, (s + start), (len + 1));
+	return (substr);
 }
