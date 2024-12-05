@@ -15,8 +15,8 @@
 size_t	ft_strlcat(char *dest, const char *src, size_t dsize)
 {
 	size_t	i;
-	size_t	dlen;
 	size_t	d;
+	size_t	dlen;
 	size_t	slen;
 
 	i = 0;
@@ -25,7 +25,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t dsize)
 	d = dlen;
 	if (dsize <= dlen)
 		return (dsize + slen);
-	while (src[i] != '\0' && d < (dsize - 1))
+	while (src[i] && d < (dsize - 1))
 	{
 		dest[d] = src[i];
 		d++;
@@ -34,3 +34,33 @@ size_t	ft_strlcat(char *dest, const char *src, size_t dsize)
 	dest[d] = '\0';
 	return (dlen + slen);
 }
+/*
+//TEST CASES
+#include <string.h>
+#include <stdio.h>
+
+void	test(const char *src, unsigned int dsize)
+{
+	char	dest_orjinal[100] = "Hello ";
+	char	dest_mine[100] = "Hello ";
+	int		n_orjinal;
+	int		n_mine;
+
+	printf("Source : '%s'\n", src);
+	printf("dsize = %d\n", dsize);
+	n_orjinal = strlcat(dest_orjinal, src, dsize);
+	printf("strlcat : '%s', returned length %d\n", dest_orjinal, n_orjinal);
+	n_mine = ft_strlcat(dest_mine, src, dsize);
+	printf("ft_strlcat : '%s', returned length %d\n\n", dest_mine, n_mine);
+}
+
+int	main(void)
+{
+	test("", 10);
+	test(" World 42!", 0);
+	test(" World 42!", 5);
+	test(" World 42!", 10);
+	test(" World 42!", 15);
+	return (0);
+}
+*/

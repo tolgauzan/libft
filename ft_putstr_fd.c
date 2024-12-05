@@ -10,12 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <unistd.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
-		return ;
-	while (*s != '\0')
-		write(fd, s++, 1);
+	ssize_t	bytes_written;
+	size_t	strlen;
+
+	if (s || fd >= 0)
+	{
+		strlen = ft_strlen(s);
+		bytes_written = write(fd, s, strlen);
+		while (bytes_written != -1 && (size_t)bytes_written < strlen)
+		{
+			strlen -= bytes_written;
+			s += bytes_written;
+			bytes_written = write(fd, s, strlen);
+		}
+	}
 }
+/*
+//TEST CASES
+#include <fcntl.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	char	*test_cases[] = {"Hello 42!\n", "Hello\n", "World!\n"};
+	int		fd = open("ft_putstr_fd_test", O_CREAT | O_RDWR, 0777);
+
+	printf("Standard input :\n");
+	for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++)
+		ft_putstr_fd(test_cases[i], STDIN_FILENO);
+	printf("Standard output :\n");
+	for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++)
+		ft_putstr_fd(test_cases[i], STDOUT_FILENO);
+	printf("Standard error :\n");
+	for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++)
+		ft_putstr_fd(test_cases[i], STDERR_FILENO);
+	if (fd != -1)
+	{
+		printf("New file : check file ft_putstr_fd_test\n");
+		for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++)
+			ft_putstr_fd(test_cases[i], fd);
+		close(fd);
+	}
+	return (0);
+}
+*/

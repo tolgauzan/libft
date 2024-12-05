@@ -13,77 +13,100 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static char	**free_mem(char **arr)
+static char	**ft_free(char **list)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (list[i] != NULL)
 	{
-		free(arr[i]);
+		free(list[i]);
+		list[i] = NULL;
 		i++;
 	}
-	free(arr);
+	free(list);
 	return (NULL);
 }
 
-static int	count_words(const char *str, char sep)
+static size_t	ft_wordlen(char const *s, char c)
 {
-	int	count;
+	size_t	len;
+
+	len = 0;
+	while (*s && *s != c)
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
+
+static size_t	ft_wordcount(char const *s, char c)
+{
+	size_t	count;
 
 	count = 0;
-	while (*str != '\0')
+	while (*s)
 	{
-		if (*str == sep)
-			str++;
+		if (*s == c)
+			s++;
 		else
 		{
+			s += ft_wordlen(s, c);
 			count++;
-			while (*str != '\0' && *str != sep)
-				str++;
 		}
 	}
 	return (count);
 }
 
-static int	word_len(const char *str, char sep)
-{
-	int	len;
-
-	len = 0;
-	while (*str != '\0' && *str != sep)
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
-
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
-	int		i;
+	char	**list;
+	size_t	i;
 
+	if (!s)
+		return (NULL);
+	list = (char **)malloc((ft_wordcount(s, c) + 1) * sizeof(char *));
+	if (!list)
+		return (NULL);
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	arr = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (arr == NULL)
-		return (NULL);
-	while (*s != '\0')
+	while (*s)
 	{
-		while (*s != '\0' && *s == c)
+		if (*s == c)
 			s++;
-		if (*s != '\0' && *s != c)
+		else
 		{
-			arr[i] = (char *)malloc((word_len(s, c) + 1) * sizeof(char));
-			if (arr[i] == NULL)
-				return (free_mem(arr));
-			ft_strlcpy(arr[i], s, (word_len(s, c) + 1));
-			s += word_len(s, c);
+			list[i] = ft_substr(s, 0, ft_wordlen(s, c));
+			if (!list[i])
+				return (ft_free(list));
+			s += ft_wordlen(s, c);
 			i++;
 		}
 	}
-	arr[i] = NULL;
-	return (arr);
+	list[i] = NULL;
+	return (list);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	char	str[] = "Hello World 42";
+	char	**list = ft_split(str, ' ');
+
+	if (!list)
+		printf("An error occured.\n");
+	else
+	{
+		int	i = 0;
+		while (list[i])
+		{
+			printf("%s\n", list[i]);
+			free(list[i]);
+			i++;
+		}
+	}
+	return (0);
+}
+*/

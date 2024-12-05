@@ -16,16 +16,52 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
+	size_t	start_i;
+	size_t	size;
 
-	if (s == NULL)
+	start_i = 0;
+	size = 0;
+	if (!s)
 		return (NULL);
-	if (len == 0 || start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	substr = (char *)malloc((len + 1) * sizeof(char));
-	if (substr == NULL)
+	while (start_i < start && s[start_i])
+		start_i++;
+	while (size < len && s[size + start_i])
+		size++;
+	substr = (char *)malloc((size + 1) * sizeof(char));
+	if (!substr)
 		return (NULL);
-	ft_strlcpy(substr, (s + start), (len + 1));
+	substr[size] = '\0';
+	while (size--)
+	{
+		substr[size] = s[start_i + size];
+	}
 	return (substr);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	char	string[] = "Hello World 42";
+	char	*sub1 = ft_substr(string, 0, 5);
+	char	*sub2 = ft_substr(string, 6, 30);
+	char	*sub3 = ft_substr(NULL, 5, 5);
+
+	printf("Source : %s\n", string);
+	if (!sub1)
+		printf("An error occured.\n");
+	else
+		printf("Substr from index = %d of length len = %d\n%s\n", 0, 5, sub1);
+	if (!sub2)
+		printf("An error occured.\n");
+	else
+		printf("Substr from index = %d of length len = %d\n%s\n", 6, 30, sub2);
+	if (!sub3)
+		printf("An error occured.\n");
+	else
+		printf("Substr from index = %d of length len = %d\n%s\n", 5, 5, sub3);
+	free(sub1);
+	free(sub2);
+}
+*/

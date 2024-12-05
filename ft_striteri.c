@@ -10,18 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/_types/_null.h>
-
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
-	if (s == NULL || f == NULL)
-		return ;
 	i = 0;
-	while (s[i] != '\0')
+	while (s && f && s[i])
 	{
 		f(i, &s[i]);
 		i++;
 	}
 }
+/*
+//TEST CASES
+#include <stdio.h>
+#include "libft.h"
+
+void	foo(unsigned int i, char *c)
+{
+	if (i % 2)
+		*c = ft_tolower(*c);
+	else
+		*c = ft_toupper(*c);
+}
+
+int	main(void)
+{
+	char	str[] = "hello world 42";
+
+	printf("Before ft_striteri : %s\n", str);
+	ft_striteri(str, &foo);
+	printf("After ft_striteri : %s\n", str);
+	return (0);
+}
+*/

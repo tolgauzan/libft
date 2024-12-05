@@ -12,7 +12,28 @@
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
+	if (c >= 65 && c <= 90)
 		c += 32;
 	return (c);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+#include <ctype.h>
+
+int	main(void)
+{
+	printf("char\tprint\ttolower\tft_tolower\n");
+	for (int i = 65; i <= 90; i++)
+	{
+		printf("%d\t", i);
+		if (isprint(i))
+			printf("%c\t", i);
+		else
+			printf("-\t");
+		printf("%c\t", tolower(i));
+		printf("%c\n", ft_tolower(i));
+	}
+	return (0);
+}
+*/

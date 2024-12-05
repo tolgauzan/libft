@@ -24,3 +24,35 @@ t_list	*ft_lstnew(void	*content)
 	new_node->next = NULL;
 	return (new_node);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	int		data1 = 42;
+	char	*data2 = "Hello";
+	t_list	*node1 = ft_lstnew(&data1);
+	t_list	*node2 = ft_lstnew(data2);
+
+	if (!node1)
+		printf("Memory allocation failed.\n");
+	else
+	{
+		printf("First node content : %d\n", *(int *)node1->content);
+		if (node1->next)
+			printf("Member next is not NULL.\n");
+	}
+	if (!node2)
+		printf("Memory allocation failed.\n");
+	else
+	{
+		printf("Second node content : %s\n", (char *)node2->content);
+		if (node2->next)
+			printf("Member next is not NULL.\n");
+	}
+	free(node1);
+	free(node2);
+	return (0);
+}
+*/

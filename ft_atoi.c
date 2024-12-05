@@ -12,26 +12,61 @@
 
 int	ft_atoi(const char *str)
 {
-	int	res;
+	int	result;
 	int	sign;
 
-	res = 0;
+	result = 0;
 	sign = 1;
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '-')
+	if (*str == 43 || *str == 45)
 	{
-		sign = -1;
+		if (*str == 45)
+			sign = -1;
 		str++;
 	}
-	else if (*str == '+')
-		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == 43 || *str == 45)
 		return (0);
-	while (*str >= '0' && *str <= '9')
+	while (*str >= 48 && *str <= 57)
 	{
-		res = (res * 10) + (*str - '0');
+		result *= 10;
+		result += *str - 48;
 		str++;
 	}
-	return (res * sign);
+	return (result * sign);
 }
+/*	
+//TEST CASES
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(void)
+{
+	const char	*test_cases[] = {
+		"12345",
+		"-54321",
+		"  6789",
+		"+9876",
+		"0",
+		"-0",
+		"2147483647",
+		"-2147483648",
+		"  123abc",
+		"abc123",
+		"123abc456",
+		"",
+		"   ",
+		NULL
+	};
+	const char	**test = test_cases;
+
+	while (*test)
+	{
+		printf("Input: \"%s\"\n", *test);
+		printf("atoi: %d\n", atoi(*test));
+		printf("ft_atoi: %d\n\n", ft_atoi(*test));
+		test++;
+	}
+	return (0);
+}
+*/

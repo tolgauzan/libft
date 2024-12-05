@@ -12,7 +12,28 @@
 
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (c >= 97 && c <= 122)
 		c -= 32;
 	return (c);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+#include <ctype.h>
+
+int	main(void)
+{
+	printf("char\tprint\ttolower\tft_tolower\n");
+	for (int i = 97; i <= 122; i++)
+	{
+		printf("%d\t", i);
+		if (isprint(i))
+			printf("%c\t", i);
+		else
+			printf("-\t");
+		printf("%c\t", toupper(i));
+		printf("%c\n", ft_toupper(i));
+	}
+	return (0);
+}
+*/

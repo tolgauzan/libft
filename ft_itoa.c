@@ -10,22 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
-static int	digit_count(int n)
+static size_t	ft_digitlen(int n)
 {
-	int	len;
+	long	nb;
+	size_t	len;
 
 	len = 0;
-	if (n < 0)
+	nb = n;
+	if (nb <= 0)
 	{
+		nb *= -1;
 		len++;
-		n = -n;
 	}
-	while (n != 0)
+	while (nb)
 	{
-		n = n / 10;
+		nb /= 10;
 		len++;
 	}
 	return (len);
@@ -33,27 +34,51 @@ static int	digit_count(int n)
 
 char	*ft_itoa(int n)
 {
-	char		*str;
-	int			len;
-	long int	num;
+	long	nb;
+	size_t	len;
+	char	*str;
 
-	num = n;
-	len = digit_count(num);
-	if (n == 0)
-		return (ft_strdup("0"));
+	nb = n;
+	len = ft_digitlen(n);
 	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
-	if (num < 0)
+	if (nb == 0)
+		str[0] = '0';
+	if (nb < 0)
 	{
 		str[0] = '-';
-		num = -num;
+		nb = -nb;
 	}
 	str[len] = '\0';
-	while (num > 0)
+	while (nb > 0)
 	{
-		str[--len] = (num % 10) + '0';
-		num = num / 10;
+		str[--len] = (nb % 10) + '0';
+		nb /= 10;
 	}
 	return (str);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	char	*str;
+	int		integers[5] = {12345, -98765, 0, -2147483648, 2147483647};
+
+	for (int i = 0; i < 5; i++)
+	{
+		printf("Input : %d\n", integers[i]);
+		str = ft_itoa(integers[i]);
+		if (!str)
+			printf("Memory allocation failed.\n\n");
+		else
+		{
+			printf("ft_itoa : %s\n\n", str);
+			free(str);
+		}
+	}
+	return (0);
+}
+*/

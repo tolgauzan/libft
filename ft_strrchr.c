@@ -11,20 +11,39 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <sys/_types/_null.h>
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	len;
+	char	*last;
 
-	len = ft_strlen(s);
-	while (len >= 0)
+	last = NULL;
+	while (*s)
 	{
-		if (s[len] == (char)c)
-		{
-			return ((char *)&s[len]);
-		}
-		len--;
+		if (*s == (unsigned char)c)
+			last = (char *)s;
+		s++;
 	}
-	return (NULL);
+	if (*s == (unsigned char)c)
+		last = (char *)s;
+	return (last);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+#include <string.h>
+
+int	main(void)
+{
+	const char	string[] = "Hello world !";
+	int			chr[4] = {'o', 'c', '\0', '\x7f'};
+
+	printf("Source : %s\n\n", string);
+	for (int i = 0; i < 4; i++)
+	{
+		printf("Looking for '%c'\n", chr[i]);
+		printf("strrchr : %p\n", strrchr(string, chr[i]));
+		printf("ft_strrchr : %p\n\n", ft_strrchr(string, chr[i]));
+	}
+	return (0);
+}
+*/

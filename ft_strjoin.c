@@ -15,23 +15,52 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	char	*dest_start;
+	char	*joined;
+	size_t	i;
+	size_t	j;
 
-	if (s1 == NULL || s2 == NULL)
+	if (!s1 || !s2)
 		return (NULL);
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (str == NULL)
+	i = 0;
+	while (s1[i])
+		i++;
+	j = 0;
+	while (s2[j])
+		j++;
+	joined = (char *)malloc((i + j + 1) * sizeof(char));
+	if (!joined)
 		return (NULL);
-	dest_start = str;
-	while (*s1 != '\0')
-	{
-		*str++ = *s1++;
-	}
-	while (*s2 != '\0')
-	{
-		*str++ = *s2++;
-	}
-	*str = '\0';
-	return (dest_start);
+	i = 0;
+	while (*s1)
+		joined[i++] = *s1++;
+	while (*s2)
+		joined[i++] = *s2++;
+	joined[i] = '\0';
+	return (joined);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	char	s1[] = "Hello";
+	char	s2[] = " ";
+	char	s3[] = "42!";
+
+	printf("Initial string : \"%s\"\n", s1);
+	char	*joined1 = ft_strjoin(s1, s2);
+	if (!joined1)
+		printf("Memory allocation failed.\n");
+	else
+		printf("Joined string : \"%s\"\n", joined1);
+	char	*joined2 = ft_strjoin(joined1, s3);
+	if (!joined2)
+		printf("Memory allocation failed.\n");
+	else
+		printf("Joined string : \"%s\"\n", joined2);
+	free(joined1);
+	free(joined2);
+	return (0);
+}
+*/

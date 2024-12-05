@@ -15,23 +15,37 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*start_index;
-	char	*end_index;
-	char	*dest;
-	size_t	len;
+	char	*trimmed;
+	size_t	size;
 
-	if (s1 == NULL || set == NULL)
+	if (!s1 || !set)
 		return (NULL);
-	start_index = (char *)s1;
-	while (*start_index != '\0' && ft_strchr(set, *start_index))
-		start_index++;
-	end_index = (char *)s1 + ft_strlen(s1) - 1;
-	while (end_index > start_index && ft_strchr(set, *end_index))
-		end_index--;
-	len = (end_index - start_index) + 1;
-	dest = (char *)malloc((len + 1) * sizeof(char));
-	if (dest == NULL)
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	size = ft_strlen(s1);
+	while (size > 0 && ft_strchr(set, s1[size - 1]))
+		size--;
+	trimmed = (char *)malloc((size + 1) * sizeof(char));
+	if (!trimmed)
 		return (NULL);
-	ft_strlcpy(dest, start_index, (len + 1));
-	return (dest);
+	ft_strlcpy(trimmed, s1, size + 1);
+	return (trimmed);
 }
+/*
+//TEST CASES
+#include <stdio.h>
+
+int	main(void)
+{
+	char	str[] = " abc\nHello\t42! \tbbc \n";
+	char	set[] = " abc\n\t";
+
+	char	*trimmed = ft_strtrim(str, set);
+	if (!trimmed)
+		printf("An error occured.\n");
+	else
+		printf("Trimmed str : %s\n", trimmed);
+	free(trimmed);
+	return (0);
+}
+*/
