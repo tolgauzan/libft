@@ -1,9 +1,3 @@
-<div align="center">
-  <!-- Logo -->
-  <a href="https://github.com/tolgauzan/libft">
-  <img src="docs/libft.png" alt="Logo" width="150" height="150">
-  </a>
-</div>
 
 # Libft
 
@@ -13,8 +7,6 @@ Bu projenin amacı bir C kütüphanesi yazmaktır. Yazacağınız diğer program
 C programlama, kullanışlı standart fonksiyonlara erişiminiz olmadığında çok sıkıcı olabilir.Bu proje, bu fonksiyonların çalışma mantığını anlamak, onları implement edebilmek ve nasıl kullanılması gerekteğini öğrenmekle ilgilidir.
 
 Not : 125/100 \
-Pdf v.16.1 : [`TR`](docs/libft_v16.1.tr.pdf) [`EN`](docs/libft_v16.1.en.pdf) \
-42 Norm v.4 : [`EN`](docs/norm_v4.en.pdf)
 
 ## İçerik
 
